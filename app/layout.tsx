@@ -1,26 +1,30 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google"
+import { Be_Vietnam_Pro, IBM_Plex_Mono, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import "./globals.css"
 
-const ibmPlexSans = IBM_Plex_Sans({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-ibm-plex-sans",
+const beVietnamPro = Be_Vietnam_Pro({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-be-vietnam",
 })
 const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
   subsets: ["latin"],
   variable: "--font-ibm-plex-mono",
 })
-const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas" })
+const playfairDisplay = Playfair_Display({ 
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin", "vietnamese"], 
+  variable: "--font-playfair" 
+})
 
 export const metadata: Metadata = {
-  title: "SIGNAL — Experimental Creative Studio",
+  title: "HCM202 - Xây Dựng Nhà Nước Trong Sạch, Vững Mạnh",
   description:
-    "Interface studies in controlled environments. We design systems that behave, not just screens that display.",
+    "Tư tưởng Hồ Chí Minh về xây dựng Nhà nước trong sạch, vững mạnh. Kiểm soát quyền lực, phòng chống tiêu cực, và các biện pháp xây dựng.",
   generator: "v0.app",
   icons: {
     icon: [
@@ -47,9 +51,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark bg-background">
+    <html lang="vi" className="bg-background">
       <body
-        className={`${ibmPlexSans.variable} ${bebasNeue.variable} ${ibmPlexMono.variable} font-sans antialiased overflow-x-hidden`}
+        className={`${beVietnamPro.variable} ${playfairDisplay.variable} ${ibmPlexMono.variable} font-sans antialiased overflow-x-hidden`}
       >
         <div className="noise-overlay" aria-hidden="true" />
         <SmoothScroll>{children}</SmoothScroll>

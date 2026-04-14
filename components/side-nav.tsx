@@ -4,11 +4,11 @@ import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { id: "hero", label: "Index" },
-  { id: "signals", label: "Signals" },
-  { id: "work", label: "Experiments" },
-  { id: "principles", label: "Principles" },
-  { id: "colophon", label: "Colophon" },
+  { id: "hero", label: "Trang chủ" },
+  { id: "tongquan", label: "Tổng quan" },
+  { id: "phan1", label: "Phần 1 & 2" },
+  { id: "phan3", label: "Phần 3 & 4" },
+  { id: "ketluan", label: "Kết luận" },
 ]
 
 export function SideNav() {
@@ -42,26 +42,42 @@ export function SideNav() {
   }
 
   return (
-    <nav className="fixed left-0 top-0 z-50 h-screen w-16 md:w-20 hidden md:flex flex-col justify-center border-r border-border/30 bg-background/80 backdrop-blur-sm">
+    <nav className="fixed left-0 top-0 z-50 h-screen w-16 md:w-20 hidden md:flex flex-col justify-center border-r border-primary/20 bg-background/90 backdrop-blur-sm">
+      {/* Star logo at top */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2">
+        <svg className="w-6 h-6 text-primary" viewBox="0 0 100 100">
+          <polygon fill="currentColor" points="50,5 61,40 98,40 68,62 79,97 50,75 21,97 32,62 2,40 39,40" />
+        </svg>
+      </div>
+
       <div className="flex flex-col gap-6 px-4">
         {navItems.map(({ id, label }) => (
           <button key={id} onClick={() => scrollToSection(id)} className="group relative flex items-center gap-3">
             <span
               className={cn(
-                "h-1.5 w-1.5 rounded-full transition-all duration-300",
-                activeSection === id ? "bg-accent scale-125" : "bg-muted-foreground/40 group-hover:bg-foreground/60",
+                "h-2 w-2 transition-all duration-300",
+                activeSection === id 
+                  ? "bg-primary scale-125" 
+                  : "bg-muted-foreground/30 group-hover:bg-primary/60",
               )}
             />
             <span
               className={cn(
-                "absolute left-6 font-mono text-[10px] uppercase tracking-widest opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:left-8 whitespace-nowrap",
-                activeSection === id ? "text-accent" : "text-muted-foreground",
+                "absolute left-6 font-sans text-[10px] uppercase tracking-widest opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:left-8 whitespace-nowrap font-medium",
+                activeSection === id ? "text-primary" : "text-muted-foreground",
               )}
             >
               {label}
             </span>
           </button>
         ))}
+      </div>
+
+      {/* HCM202 label at bottom */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+        <span className="font-mono text-[8px] text-primary/60 uppercase tracking-widest -rotate-90 block whitespace-nowrap origin-center">
+          HCM202
+        </span>
       </div>
     </nav>
   )
