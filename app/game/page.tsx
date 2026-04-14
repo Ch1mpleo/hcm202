@@ -846,13 +846,9 @@ export default function GamePage() {
     const q = shuffledQuestions[questionIndex]
     const correct = shuffledOptions[idx]?.originalIndex === q.correctIndex
 
+    stopTimer()
     if (correct) {
-      stopTimer()
-      const pts = Math.max(
-        POINTS_BY_ATTEMPT[Math.min(attempt - 1, 3)],
-        0
-      )
-      // Streak bonus
+      const pts = POINTS_BY_ATTEMPT[0] // always first-attempt points since only 1 chance
       const newStreak = streak + 1
       const bonus = newStreak >= 3 ? Math.min(newStreak, 5) : 0
       const total = pts + bonus
@@ -862,7 +858,7 @@ export default function GamePage() {
       setLastPointsEarned(total)
       setRecords((prev) => [
         ...prev,
-        { caseId: currentCase!.id, questionId: q.id, correct: true, attempt, points: total },
+        { caseId: currentCase!.id, questionId: q.id, correct: true, attempt: 1, points: total },
       ])
       setLastAnswerCorrect(true)
       setGavelAnim({ show: true, correct: true })
@@ -871,26 +867,19 @@ export default function GamePage() {
         setScreen("explanation")
       }, 700)
     } else {
-      if (attempt < 4) {
-        // Timer keeps running — just disable the chosen option and increment attempt
-        setDisabledOptions((prev) => [...prev, idx])
-        setAttempt((a) => a + 1)
-      } else {
-        stopTimer()
-        // 4th wrong attempt — 0 points
-        setStreak(0)
-        setLastPointsEarned(0)
-        setRecords((prev) => [
-          ...prev,
-          { caseId: currentCase!.id, questionId: q.id, correct: false, attempt, points: 0 },
-        ])
-        setLastAnswerCorrect(false)
-        setGavelAnim({ show: true, correct: false })
-        setTimeout(() => {
-          setGavelAnim({ show: false, correct: false })
-          setScreen("explanation")
-        }, 700)
-      }
+      // Wrong on first (and only) attempt — 0 points, move on
+      setStreak(0)
+      setLastPointsEarned(0)
+      setRecords((prev) => [
+        ...prev,
+        { caseId: currentCase!.id, questionId: q.id, correct: false, attempt: 1, points: 0 },
+      ])
+      setLastAnswerCorrect(false)
+      setGavelAnim({ show: true, correct: false })
+      setTimeout(() => {
+        setGavelAnim({ show: false, correct: false })
+        setScreen("explanation")
+      }, 700)
     }
   }
 
