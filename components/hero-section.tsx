@@ -6,6 +6,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { Landmark } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -68,25 +69,26 @@ export function HeroSection() {
       {/* Main content */}
       <div ref={contentRef} className="flex-1 w-full relative z-10 max-w-2xl">
         {/* Course label */}
-        <div className="inline-flex items-center gap-3 mb-6">
+        <div className="inline-flex items-center gap-3 mb-4">
           <div className="w-10 h-[2px] bg-primary" />
+          <Landmark className="w-4 h-4 text-primary" aria-hidden="true" />
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary font-semibold">
             Tư tưởng Hồ Chí Minh
           </span>
         </div>
 
         {/* Main title — line-height increased for Vietnamese diacritics */}
-        <h1 className="font-[var(--font-playfair)] text-foreground text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.25] tracking-[0.01em] font-bold">
+        <h1 className="font-[var(--font-playfair)] text-foreground text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.15] tracking-[0.01em] font-bold">
           <span className="block">XÂY DỰNG</span>
           <span className="block text-primary">NHÀ NƯỚC</span>
           <span className="block">TRONG SẠCH</span>
         </h1>
 
-        <h2 className="font-sans text-foreground/70 text-base md:text-lg mt-6 tracking-[0.05em] font-medium">
+        <h2 className="font-sans text-foreground/70 text-base md:text-lg mt-4 tracking-[0.05em] font-medium">
           Vững Mạnh Theo Tư Tưởng Hồ Chí Minh
         </h2>
 
-        <p className="mt-6 max-w-xl font-sans text-sm md:text-base text-muted-foreground leading-relaxed">
+        <p className="mt-4 max-w-xl font-sans text-sm md:text-base text-muted-foreground leading-relaxed">
           Nghiên cứu về kiểm soát quyền lực nhà nước, phòng chống tiêu cực, và các biện pháp xây dựng nhà nước của dân, do dân, vì dân theo tư tưởng của Chủ tịch Hồ Chí Minh.
         </p>
 
