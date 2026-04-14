@@ -323,6 +323,7 @@ function QuestionScreen({
   totalQuestions,
   attempt,
   streak,
+  shuffledOptions,
   onAnswer,
   onHint,
   hintUsed,
