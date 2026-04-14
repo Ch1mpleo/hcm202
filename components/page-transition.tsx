@@ -12,10 +12,8 @@ export function usePageExit() {
   return useContext(ExitContext)
 }
 
-const CURTAIN_LABEL_ENTER = "Bước vào"
-const CURTAIN_LABEL_EXIT  = "Trở về"
-const CURTAIN_TITLE       = "Phiên Tòa Liêm Chính"
-const EMBLEM_SRC          = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-nPHUcZG0NFWlUSiWMSB1CEAUZDFGBW.png"
+const CURTAIN_TEXT_ENTER = "Bước vào phiên tòa liêm chính"
+const CURTAIN_TEXT_EXIT  = "Trở về trang chủ"
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const curtainRef  = useRef<HTMLDivElement>(null)
@@ -29,7 +27,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const content = contentRef.current
     if (!curtain || !content) return
 
-    if (labelRef.current) labelRef.current.textContent = CURTAIN_LABEL_ENTER
+    if (labelRef.current) labelRef.current.textContent = CURTAIN_TEXT_ENTER
 
     const tl = gsap.timeline()
     gsap.set(curtain, { x: "-100%", display: "flex" })
@@ -50,7 +48,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const curtain = curtainRef.current
     if (!curtain) { router.push(href); return }
 
-    if (labelRef.current) labelRef.current.textContent = CURTAIN_LABEL_EXIT
+    if (labelRef.current) labelRef.current.textContent = CURTAIN_TEXT_EXIT
 
     gsap.set(curtain, { display: "flex", x: "-100%" })
     gsap.to(curtain, {
@@ -70,23 +68,11 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         style={{ background: "oklch(0.42 0.19 27)" }}
         aria-hidden="true"
       >
-        <div className="flex flex-col items-center gap-6 text-center px-6">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={EMBLEM_SRC}
-            alt=""
-            className="w-24 h-24 object-contain drop-shadow-xl"
-          />
-          <div>
-            <p ref={labelRef} className="font-mono text-xs uppercase tracking-[0.5em] text-white/60 mb-2" />
-            <p
-              className="font-bold uppercase tracking-[0.15em] text-white"
-              style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1.2rem, 4vw, 2rem)" }}
-            >
-              {CURTAIN_TITLE}
-            </p>
-          </div>
-        </div>
+        <p
+          ref={labelRef}
+          className="font-bold text-white text-center px-8"
+          style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1.4rem, 4vw, 2.4rem)", letterSpacing: "0.04em" }}
+        />
       </div>
 
       <div ref={contentRef}>
