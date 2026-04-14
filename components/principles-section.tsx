@@ -137,11 +137,11 @@ export function PrinciplesSection() {
           </div>
 
           {/* Image banner — full width, above cause cards */}
-          <div className="animate-item relative w-full mb-6 overflow-hidden border-2 border-border bg-stone-100">
+          <div className="animate-item relative w-full h-64 mb-6 overflow-hidden border-2 border-border bg-stone-100 flex items-center justify-center">
             <img
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ExW4c6P1iZnIy1HtSn3Dxfq0Yoh6im.png"
               alt="Lãnh đạo Chính phủ gặp gỡ cán bộ lão thành"
-              className="w-full h-auto block"
+              className="w-full h-full object-contain"
             />
             <div className="absolute bottom-0 right-0 p-3">
               <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 bg-background/70 px-2 py-1">
