@@ -44,17 +44,17 @@ export function SideNav() {
 
   return (
     <nav className="fixed left-0 top-0 z-50 h-screen w-16 md:w-20 hidden md:flex flex-col justify-center border-r border-primary/20 bg-background/90 backdrop-blur-sm">
-      {/* VN star illustration — full width top banner */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden" style={{ height: "120px" }}>
+      {/* National emblem at top */}
+      <div className="absolute top-0 left-0 w-full flex items-center justify-center bg-[#8b0000]/10 border-b border-primary/20 py-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-u84uUE2ROtJ9azvBdqyy8mkQOHoU37.png"
-          alt="Ngôi sao Việt Nam"
-          className="w-full h-full object-cover object-top"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-dRBQD2T0v8LtKBeg1EIoci9PWFQqiJ.png"
+          alt="Quốc huy Việt Nam"
+          className="w-12 h-12 object-contain drop-shadow-md"
         />
       </div>
 
-      <div className="flex flex-col gap-6 px-4 mt-16">
+      <div className="flex flex-col gap-6 px-4 mt-14">
         {navItems.map(({ id, label }) => (
           <button key={id} onClick={() => scrollToSection(id)} className="group relative flex items-center gap-3">
             <span
