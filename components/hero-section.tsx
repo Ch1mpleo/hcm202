@@ -38,27 +38,25 @@ export function HeroSection() {
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Large star watermark */}
-        <svg 
-          className="absolute -right-20 top-1/2 -translate-y-1/2 w-[700px] h-[700px] text-primary/8" 
+        <svg
+          className="absolute -right-20 top-1/2 -translate-y-1/2 w-[600px] h-[600px] text-primary/6"
           viewBox="0 0 100 100"
           aria-hidden="true"
         >
-          <polygon 
-            fill="currentColor" 
+          <polygon
+            fill="currentColor"
             points="50,5 61,40 98,40 68,62 79,97 50,75 21,97 32,62 2,40 39,40"
           />
         </svg>
 
-        {/* Decorative red bars - bolder */}
-        <div className="absolute top-16 left-0 w-48 h-3 bg-primary" />
-        <div className="absolute top-24 left-0 w-32 h-2 bg-primary/60" />
-        <div className="absolute bottom-32 left-0 w-24 h-2 bg-primary/40" />
-        
-        {/* Golden accent */}
-        <div className="absolute top-40 left-0 w-16 h-1 bg-golden" />
+        {/* Decorative red bars */}
+        <div className="absolute top-16 left-0 w-40 h-2 bg-primary" />
+        <div className="absolute top-24 left-0 w-24 h-1.5 bg-primary/50" />
+        <div className="absolute bottom-32 left-0 w-20 h-1 bg-primary/30" />
+        <div className="absolute top-40 left-0 w-12 h-1 bg-golden" />
       </div>
 
-      {/* Left vertical labels */}
+      {/* Left vertical label */}
       <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2">
         <span className="font-mono text-xs uppercase tracking-[0.4em] text-primary -rotate-90 origin-left block whitespace-nowrap font-semibold">
           HCM202
@@ -66,76 +64,74 @@ export function HeroSection() {
       </div>
 
       {/* Main content */}
-      <div ref={contentRef} className="flex-1 w-full relative z-10 max-w-3xl">
+      <div ref={contentRef} className="flex-1 w-full relative z-10 max-w-2xl">
         {/* Course label */}
-        <div className="inline-flex items-center gap-4 mb-8">
-          <div className="w-12 h-[3px] bg-primary" />
-          <span className="font-mono text-sm uppercase tracking-[0.25em] text-primary font-bold">
+        <div className="inline-flex items-center gap-3 mb-6">
+          <div className="w-10 h-[2px] bg-primary" />
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary font-semibold">
             Tư tưởng Hồ Chí Minh
           </span>
         </div>
 
-        {/* Main title - larger with more spacing */}
-        <h1 className="font-[var(--font-playfair)] text-foreground text-[clamp(3rem,10vw,7rem)] leading-[1.1] tracking-[0.04em] font-bold">
+        {/* Main title — line-height increased for Vietnamese diacritics */}
+        <h1 className="font-[var(--font-playfair)] text-foreground text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.35] tracking-[0.02em] font-bold">
           <span className="block">XÂY DỰNG</span>
           <span className="block text-primary">NHÀ NƯỚC</span>
           <span className="block">TRONG SẠCH</span>
         </h1>
 
-        <h2 className="font-sans text-foreground/80 text-[clamp(1.25rem,3vw,1.75rem)] mt-8 tracking-[0.05em] font-semibold">
+        <h2 className="font-sans text-foreground/70 text-base md:text-lg mt-6 tracking-[0.05em] font-medium">
           Vững Mạnh Theo Tư Tưởng Hồ Chí Minh
         </h2>
 
-        <p className="mt-10 max-w-xl font-sans text-base md:text-lg text-muted-foreground leading-[1.9] tracking-wide">
+        <p className="mt-6 max-w-xl font-sans text-sm md:text-base text-muted-foreground leading-relaxed">
           Nghiên cứu về kiểm soát quyền lực nhà nước, phòng chống tiêu cực, và các biện pháp xây dựng nhà nước của dân, do dân, vì dân theo tư tưởng của Chủ tịch Hồ Chí Minh.
         </p>
 
-        <div className="mt-14 flex items-center gap-8">
+        <div className="mt-10 flex items-center gap-6">
           <a
             href="#phan1"
-            className="group inline-flex items-center gap-4 bg-primary text-primary-foreground px-8 py-4 font-sans text-base uppercase tracking-wider font-bold hover:bg-primary/90 transition-all duration-200"
+            className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-7 py-3 font-sans text-sm uppercase tracking-widest font-bold hover:bg-primary/90 transition-all duration-200"
           >
             <span>Bắt đầu tìm hiểu</span>
-            <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
           <a
             href="#tongquan"
-            className="font-sans text-base uppercase tracking-wider text-foreground hover:text-primary transition-colors duration-200 font-semibold"
+            className="font-sans text-sm uppercase tracking-widest text-foreground hover:text-primary transition-colors duration-200 font-medium"
           >
             Tổng quan
           </a>
         </div>
 
-        {/* Quote - larger */}
-        <div className="mt-20 border-l-4 border-primary pl-8 max-w-lg">
-          <p className="font-[var(--font-playfair)] text-xl md:text-2xl italic text-foreground leading-[1.6]">
+        {/* Quote */}
+        <div className="mt-16 border-l-4 border-primary pl-6 max-w-md">
+          <p className="font-[var(--font-playfair)] text-lg md:text-xl italic text-foreground leading-relaxed">
             {'"'}Không có gì quý hơn độc lập, tự do{'"'}
           </p>
-          <p className="mt-4 font-mono text-sm text-primary uppercase tracking-[0.2em] font-semibold">
+          <p className="mt-3 font-mono text-xs text-primary uppercase tracking-[0.2em] font-semibold">
             — Hồ Chí Minh
           </p>
         </div>
       </div>
 
-      {/* Hero image - larger and more prominent */}
-      <div className="hidden lg:block absolute right-0 top-0 h-full w-[50%] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent z-10" />
+      {/* Hero image */}
+      <div className="hidden lg:block absolute right-0 top-0 h-full w-[45%] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/50 to-transparent z-10" />
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-tWEOIQVSK68PinbFiuGUbU2yEX6v7a.png"
-          alt="Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JTIwKRIUuI0na1iARxB4ECvCsEb7lr.png"
+          alt="Chân dung Chủ tịch Hồ Chí Minh"
           fill
-          className="object-cover object-center opacity-80"
+          className="object-cover object-top"
           priority
         />
-        {/* Overlay frame effect */}
-        <div className="absolute inset-y-20 right-12 left-12 border-2 border-primary/20 z-20" />
       </div>
 
       {/* Floating info tag */}
       <div className="absolute bottom-10 right-10 md:bottom-16 md:right-16 z-20">
-        <div className="border-2 border-primary bg-background px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-primary font-bold">
+        <div className="border border-primary bg-background px-5 py-2 font-mono text-xs uppercase tracking-[0.2em] text-primary font-semibold">
           HCM202 / 2025
         </div>
       </div>
