@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils"
 const navItems = [
   { id: "hero", label: "Trang chủ" },
   { id: "tongquan", label: "Tổng quan" },
-  { id: "phan1", label: "Phần 1 & 2" },
-  { id: "phan3", label: "Phần 3 & 4" },
+  { id: "phan1", label: "Kiểm soát" },
+  { id: "phan3", label: "Biện pháp" },
   { id: "ketluan", label: "Kết luận" },
 ]
 
@@ -55,15 +55,15 @@ export function SideNav() {
           <button key={id} onClick={() => scrollToSection(id)} className="group relative flex items-center gap-3">
             <span
               className={cn(
-                "h-2 w-2 transition-all duration-300",
+                "h-3 w-3 transition-all duration-300",
                 activeSection === id 
                   ? "bg-primary scale-125" 
-                  : "bg-muted-foreground/30 group-hover:bg-primary/60",
+                  : "bg-muted-foreground/40 group-hover:bg-primary/60",
               )}
             />
             <span
               className={cn(
-                "absolute left-6 font-sans text-[10px] uppercase tracking-widest opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:left-8 whitespace-nowrap font-medium",
+                "absolute left-6 font-sans text-xs uppercase tracking-wider opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:left-8 whitespace-nowrap font-semibold",
                 activeSection === id ? "text-primary" : "text-muted-foreground",
               )}
             >
