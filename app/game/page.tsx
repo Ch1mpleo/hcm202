@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
-import Link from "next/link"
-import { PageTransition } from "@/components/page-transition"
+import { PageTransition, usePageExit } from "@/components/page-transition"
 import { CASES, getRank, type Case, type Question } from "./data"
 import {
   Gavel,
@@ -183,13 +182,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
             <span>Bắt đầu phiên tòa</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 border-2 border-border px-8 py-4 font-sans text-sm uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all duration-200"
-          >
-            <Home className="w-4 h-4" />
-            <span>Về trang chủ</span>
-          </Link>
+          <HomeButton className="inline-flex items-center justify-center gap-2 border-2 border-border px-8 py-4 font-sans text-sm uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all duration-200" />
         </div>
       </div>
     </div>
@@ -303,13 +296,7 @@ function CaseSelectScreen({
         )}
 
         <div className="mt-8 flex justify-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-primary transition-colors uppercase tracking-widest"
-          >
-            <Home className="w-3.5 h-3.5" />
-            Về trang chủ
-          </Link>
+          <HomeButton className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-primary transition-colors uppercase tracking-widest" />
         </div>
       </div>
     </div>
@@ -735,13 +722,7 @@ function ResultsScreen({
             <RotateCcw className="w-4 h-4" />
             Chơi lại
           </button>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 border-2 border-border px-8 py-4 font-sans text-sm uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all"
-          >
-            <Home className="w-4 h-4" />
-            Về trang chủ
-          </Link>
+          <HomeButton className="inline-flex items-center justify-center gap-2 border-2 border-border px-8 py-4 font-sans text-sm uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all" />
         </div>
       </div>
     </div>
@@ -749,6 +730,16 @@ function ResultsScreen({
 }
 
 // ─── Main Game Controller ─────────────────────────────────────────────────────
+function HomeButton({ className }: { className?: string }) {
+  const exit = usePageExit()
+  return (
+    <button onClick={() => exit("/")} className={className}>
+      <Home className="w-4 h-4" />
+      <span>{"Về trang chủ"}</span>
+    </button>
+  )
+}
+
 export default function GamePage() {
   const [screen, setScreen] = useState<Screen>("intro")
   const [cases, setCases] = useState<Case[]>([])
@@ -792,7 +783,7 @@ export default function GamePage() {
       setTimeLeft((t) => {
         if (t <= 1) {
           stopTimer()
-          // Time's up — treat as wrong, record 0 pts
+          // Time's up �� treat as wrong, record 0 pts
           const q = shuffledQuestions[questionIndex]
           if (q) {
             setRecords((prev) => [
