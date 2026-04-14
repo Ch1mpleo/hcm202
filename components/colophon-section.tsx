@@ -11,7 +11,6 @@ export function ColophonSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const footerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!sectionRef.current) return
@@ -47,19 +46,7 @@ export function ColophonSection() {
         })
       }
 
-      if (footerRef.current) {
-        gsap.from(footerRef.current, {
-          y: 20,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: "top 95%",
-            toggleActions: "play none none reverse",
-          },
-        })
-      }
+
     }, sectionRef)
 
     return () => ctx.revert()
@@ -151,41 +138,6 @@ export function ColophonSection() {
           </div>
         </div>
 
-        {/* Course info - larger text */}
-        <div className="animate-item grid grid-cols-2 md:grid-cols-4 gap-10">
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.4em] text-muted-foreground mb-6 font-bold">Môn học</h4>
-            <ul className="space-y-3">
-              <li className="font-sans text-base text-foreground font-semibold">HCM202</li>
-              <li className="font-sans text-base text-foreground">Tư tưởng Hồ Chí Minh</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.4em] text-muted-foreground mb-6 font-bold">Chủ đề</h4>
-            <ul className="space-y-3">
-              <li className="font-sans text-base text-foreground">Xây dựng Nhà nước</li>
-              <li className="font-sans text-base text-foreground">Trong sạch, vững mạnh</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.4em] text-muted-foreground mb-6 font-bold">Nội dung</h4>
-            <ul className="space-y-3">
-              <li className="font-sans text-base text-foreground">4 Phần chính</li>
-              <li className="font-sans text-base text-foreground">5 Biện pháp</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.4em] text-muted-foreground mb-6 font-bold">Năm học</h4>
-            <ul className="space-y-3">
-              <li className="font-sans text-base text-foreground">2024 - 2025</li>
-              <li className="font-sans text-base text-foreground">Học kỳ II</li>
-            </ul>
-          </div>
-        </div>
-
         {/* Final quote - larger and more prominent */}
         <div className="animate-item bg-primary text-primary-foreground p-10 md:p-16">
           <div className="flex items-start gap-6">
@@ -204,18 +156,6 @@ export function ColophonSection() {
         </div>
       </div>
 
-      {/* Bottom copyright */}
-      <div
-        ref={footerRef}
-        className="relative z-10 mt-28 pt-10 border-t-2 border-border flex flex-col md:flex-row md:items-center md:justify-between gap-6"
-      >
-        <p className="font-mono text-sm text-muted-foreground uppercase tracking-[0.2em] font-bold">
-          HCM202 - Tư tưởng Hồ Chí Minh
-        </p>
-        <p className="font-mono text-sm text-muted-foreground tracking-wide">
-          Xây dựng với tâm huyết. Học tập với trách nhiệm.
-        </p>
-      </div>
     </section>
   )
 }
