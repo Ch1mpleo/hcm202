@@ -5,6 +5,7 @@ import { AnimatedNoise } from "@/components/animated-noise"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
+import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -88,7 +89,7 @@ export function HeroSection() {
           Nghiên cứu về kiểm soát quyền lực nhà nước, phòng chống tiêu cực, và các biện pháp xây dựng nhà nước của dân, do dân, vì dân theo tư tưởng của Chủ tịch Hồ Chí Minh.
         </p>
 
-        <div className="mt-10 flex items-center gap-6">
+        <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
             href="#phan1"
             className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-7 py-3 font-sans text-sm uppercase tracking-widest font-bold hover:bg-primary/90 transition-all duration-200"
@@ -98,9 +99,18 @@ export function HeroSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
+          <Link
+            href="/game"
+            className="group inline-flex items-center gap-2.5 border-2 border-foreground/30 px-6 py-3 font-sans text-sm uppercase tracking-widest font-bold text-foreground hover:border-primary hover:text-primary transition-all duration-200"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+            </svg>
+            <span>Phiên Tòa Liêm Chính</span>
+          </Link>
           <a
             href="#tongquan"
-            className="font-sans text-sm uppercase tracking-widest text-foreground hover:text-primary transition-colors duration-200 font-medium"
+            className="font-sans text-sm uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors duration-200 font-medium"
           >
             Tổng quan
           </a>
