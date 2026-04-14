@@ -74,7 +74,7 @@ export function HeroSection() {
         </div>
 
         {/* Main title — line-height increased for Vietnamese diacritics */}
-        <h1 className="font-[var(--font-playfair)] text-foreground text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.35] tracking-[0.02em] font-bold">
+        <h1 className="font-[var(--font-playfair)] text-foreground text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.25] tracking-[0.01em] font-bold">
           <span className="block">XÂY DỰNG</span>
           <span className="block text-primary">NHÀ NƯỚC</span>
           <span className="block">TRONG SẠCH</span>
@@ -124,7 +124,8 @@ export function HeroSection() {
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JTIwKRIUuI0na1iARxB4ECvCsEb7lr.png"
           alt="Chân dung Chủ tịch Hồ Chí Minh"
           fill
-          className="object-cover object-top"
+          className="object-cover object-center"
+          sizes="45vw"
           priority
         />
       </div>
