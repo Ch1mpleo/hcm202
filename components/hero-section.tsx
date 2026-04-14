@@ -5,13 +5,15 @@ import { AnimatedNoise } from "@/components/animated-noise"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 gsap.registerPlugin(ScrollTrigger)
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+  const exitCurtainRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current) return
@@ -99,15 +101,25 @@ export function HeroSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
-          <Link
-            href="/game"
+          <button
+            onClick={() => {
+              const curtain = exitCurtainRef.current
+              if (!curtain) { router.push("/game"); return }
+              gsap.set(curtain, { display: "flex", x: "-100%" })
+              gsap.to(curtain, {
+                x: "0%",
+                duration: 0.45,
+                ease: "power3.inOut",
+                onComplete: () => router.push("/game"),
+              })
+            }}
             className="group inline-flex items-center gap-2.5 border-2 border-foreground/30 px-6 py-3 font-sans text-sm uppercase tracking-widest font-bold text-foreground hover:border-primary hover:text-primary transition-all duration-200"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
             </svg>
-            <span>Phiên Tòa Liêm Chính</span>
-          </Link>
+            <span>{"Phiên Tòa Liêm Chính"}</span>
+          </button>
           <a
             href="#tongquan"
             className="font-sans text-sm uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors duration-200 font-medium"
@@ -138,6 +150,29 @@ export function HeroSection() {
           sizes="45vw"
           priority
         />
+      </div>
+
+      {/* Exit curtain */}
+      <div
+        ref={exitCurtainRef}
+        className="fixed inset-0 z-[9999] hidden items-center justify-center pointer-events-none"
+        style={{ background: "oklch(0.42 0.19 27)" }}
+        aria-hidden="true"
+      >
+        <div className="flex flex-col items-center gap-5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-nPHUcZG0NFWlUSiWMSB1CEAUZDFGBW.png"
+            alt=""
+            className="w-20 h-20 object-contain"
+          />
+          <p
+            className="font-bold uppercase tracking-[0.15em] text-white"
+            style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1rem, 3vw, 1.6rem)" }}
+          >
+            {"Phiên Tòa Liêm Chính"}
+          </p>
+        </div>
       </div>
 
       {/* Floating info tag */}

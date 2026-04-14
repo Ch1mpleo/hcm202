@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import Link from "next/link"
+import { PageTransition } from "@/components/page-transition"
 import { CASES, getRank, type Case, type Question } from "./data"
 import {
   Gavel,
@@ -932,7 +933,7 @@ export default function GamePage() {
   }
 
   return (
-    <>
+    <PageTransition>
       <style>{`
         @keyframes gavelPop {
           0% { transform: scale(0.5) rotate(-15deg); opacity: 0; }
@@ -1007,6 +1008,6 @@ export default function GamePage() {
           onRestart={handleRestart}
         />
       )}
-    </>
+    </PageTransition>
   )
 }
