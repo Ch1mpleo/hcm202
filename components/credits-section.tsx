@@ -71,7 +71,7 @@ export function CreditsSection() {
 
       {/* Label */}
       <span className="font-mono text-xs uppercase tracking-[0.4em] text-primary font-bold">
-        06 / TÁC GIẢ VÀ GHI NHẬN
+        06 / TÁC GIẢ
       </span>
 
       {/* Big title */}
@@ -79,7 +79,7 @@ export function CreditsSection() {
         ref={titleRef}
         className="mt-5 mb-20 font-mono text-5xl md:text-7xl lg:text-8xl font-extrabold uppercase tracking-[0.04em] leading-[1.05] text-background"
       >
-        TÁC GIẢ VÀ<br />GHI NHẬN
+        TÁC GIẢ
       </h2>
 
       {/* Divider */}
@@ -112,8 +112,7 @@ export function CreditsSection() {
             <p className="font-mono text-base font-bold text-background leading-snug">Đại học FPT Phân Hiệu HCM</p>
             <p className="font-mono text-xs text-background/45 mt-3">Môn học: HCM202</p>
             <p className="font-mono text-xs text-background/45">Tư tưởng Hồ Chí Minh</p>
-            <p className="font-mono text-xs text-background/45 mt-3">Năm học: 2024 – 2025</p>
-            <p className="font-mono text-xs text-background/45">Học kỳ II</p>
+
           </div>
         </div>
 
@@ -146,7 +145,7 @@ export function CreditsSection() {
       {/* Bottom rule + footer */}
       <div className="mt-20 border-t border-background/20 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-background/35">
-          HCM202 — Tư tưởng Hồ Chí Minh © 2025
+          HCM202 — Tư tưởng Hồ Chí Minh
         </p>
         <p className="font-mono text-xs text-background/25 tracking-wide">
           Xây dựng với tâm huyết. Học tập với trách nhiệm.
