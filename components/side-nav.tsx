@@ -44,11 +44,14 @@ export function SideNav() {
 
   return (
     <nav className="fixed left-0 top-0 z-50 h-screen w-16 md:w-20 hidden md:flex flex-col justify-center border-r border-primary/20 bg-background/90 backdrop-blur-sm">
-      {/* Star logo at top */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2">
-        <svg className="w-6 h-6 text-primary" viewBox="0 0 100 100">
-          <polygon fill="currentColor" points="50,5 61,40 98,40 68,62 79,97 50,75 21,97 32,62 2,40 39,40" />
-        </svg>
+      {/* VN flag logo at top */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Oky4vMnoGQQg36ta2oDv32e2Z3ngNn.png"
+          alt="Cờ Việt Nam"
+          className="w-10 h-10 object-contain"
+        />
       </div>
 
       <div className="flex flex-col gap-6 px-4">
