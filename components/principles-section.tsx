@@ -136,9 +136,23 @@ export function PrinciplesSection() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Cause cards */}
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Image banner — full width, above cause cards */}
+          <div className="animate-item relative w-full h-48 mb-6 overflow-hidden border-2 border-border">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ExW4c6P1iZnIy1HtSn3Dxfq0Yoh6im.png"
+              alt="Lãnh đạo Chính phủ gặp gỡ cán bộ lão thành"
+              fill
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-background/70 via-transparent to-transparent" />
+            <div className="absolute bottom-0 right-0 p-4 text-right">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+                Gặp gỡ, lắng nghe cán bộ lão thành
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Subjective */}
               <div className="animate-item bg-card border-2 border-border p-6 hover:border-primary/50 transition-colors duration-300">
                 <div className="flex items-center gap-2.5 mb-4">
@@ -174,19 +188,6 @@ export function PrinciplesSection() {
                   ))}
                 </ul>
               </div>
-            </div>
-
-            {/* Side portrait */}
-            <div className="hidden lg:block animate-item">
-              <div className="relative aspect-[4/5] img-frame">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JTIwKRIUuI0na1iARxB4ECvCsEb7lr.png"
-                  alt="Chân dung Chủ tịch Hồ Chí Minh"
-                  fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-            </div>
           </div>
 
           <p className="animate-item mt-7 font-sans text-sm text-muted-foreground italic bg-primary/10 p-5 border-l-4 border-primary leading-relaxed">
