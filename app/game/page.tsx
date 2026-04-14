@@ -576,7 +576,7 @@ function CaseVerdictScreen({
   onNext: () => void
   isLastCase: boolean
 }) {
-  const pct = Math.round((caseScore / maxCaseScore) * 100)
+  const pct = Math.min(100, Math.round((caseScore / maxCaseScore) * 100))
   return (
     <div className="min-h-screen bg-foreground flex items-center justify-center px-6 py-12">
       <div className="max-w-2xl w-full space-y-8 text-center">
@@ -651,7 +651,7 @@ function ResultsScreen({
   maxScore: number
   onRestart: () => void
 }) {
-  const pct = Math.round((totalScore / maxScore) * 100)
+  const pct = Math.min(100, Math.round((totalScore / maxScore) * 100))
   const rank = getRank(pct)
 
   // Per-case scores
@@ -659,7 +659,7 @@ function ResultsScreen({
     const cRecords = records.filter((r) => r.caseId === c.id)
     const score = cRecords.reduce((s, r) => s + r.points, 0)
     const max = c.questions.length * 10
-    return { case: c, score, max, pct: Math.round((score / max) * 100) }
+    return { case: c, score, max, pct: Math.min(100, Math.round((score / max) * 100)) }
   })
 
   return (
@@ -689,7 +689,7 @@ function ResultsScreen({
           <div className="w-full h-2 bg-background/10 mt-4">
             <div
               className="h-full bg-primary transition-all duration-700"
-              style={{ width: `${pct}%` }}
+              style={{ width: `${Math.min(100, pct)}%` }}
             />
           </div>
         </div>
