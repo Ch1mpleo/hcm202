@@ -136,21 +136,9 @@ export function PrinciplesSection() {
             </h3>
           </div>
 
-          {/* Image banner — full width, above cause cards */}
-          <div className="animate-item relative w-full h-64 mb-6 overflow-hidden border-2 border-border bg-stone-100 flex items-center justify-center">
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ExW4c6P1iZnIy1HtSn3Dxfq0Yoh6im.png"
-              alt="Lãnh đạo Chính phủ gặp gỡ cán bộ lão thành"
-              className="w-full h-full object-contain"
-            />
-            <div className="absolute bottom-0 right-0 p-3">
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 bg-background/70 px-2 py-1">
-                Gặp gỡ, lắng nghe cán bộ lão thành
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+            {/* Cause cards */}
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Subjective */}
               <div className="animate-item bg-card border-2 border-border p-6 hover:border-primary/50 transition-colors duration-300">
                 <div className="flex items-center gap-2.5 mb-4">
@@ -186,6 +174,21 @@ export function PrinciplesSection() {
                   ))}
                 </ul>
               </div>
+            </div>
+
+            {/* Side image */}
+            <div className="animate-item hidden lg:block relative h-full min-h-[220px] overflow-hidden border-2 border-border">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ExW4c6P1iZnIy1HtSn3Dxfq0Yoh6im.png"
+                alt="Lãnh đạo Chính phủ gặp gỡ cán bộ lão thành"
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-foreground/60 to-transparent">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-background/80">
+                  Gặp gỡ cán bộ lão thành
+                </span>
+              </div>
+            </div>
           </div>
 
           <p className="animate-item mt-7 font-sans text-sm text-muted-foreground italic bg-primary/10 p-5 border-l-4 border-primary leading-relaxed">
