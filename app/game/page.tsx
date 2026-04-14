@@ -843,11 +843,11 @@ export default function GamePage() {
   }
 
   const handleAnswer = (idx: number) => {
-    stopTimer()
     const q = shuffledQuestions[questionIndex]
     const correct = shuffledOptions[idx]?.originalIndex === q.correctIndex
 
     if (correct) {
+      stopTimer()
       const pts = Math.max(
         POINTS_BY_ATTEMPT[Math.min(attempt - 1, 3)],
         0
@@ -872,10 +872,11 @@ export default function GamePage() {
       }, 700)
     } else {
       if (attempt < 4) {
+        // Timer keeps running — just disable the chosen option and increment attempt
         setDisabledOptions((prev) => [...prev, idx])
         setAttempt((a) => a + 1)
-        startTimer()
       } else {
+        stopTimer()
         // 4th wrong attempt — 0 points
         setStreak(0)
         setLastPointsEarned(0)
