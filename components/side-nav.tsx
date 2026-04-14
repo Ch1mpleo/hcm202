@@ -48,7 +48,7 @@ export function SideNav() {
       <div className="absolute top-0 left-0 w-full flex items-center justify-center border-b border-primary/20 py-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jctkPlzRrBIq03XHWCHVmsUyBQMoh6.png"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-nPHUcZG0NFWlUSiWMSB1CEAUZDFGBW.png"
           alt="Quốc huy Việt Nam"
           className="w-14 h-14 object-contain drop-shadow-md"
         />
