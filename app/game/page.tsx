@@ -40,7 +40,7 @@ interface AnswerRecord {
 }
 
 const POINTS_BY_ATTEMPT = [10, 7, 4, 1]
-const QUESTION_TIME = 45 // seconds per question
+const QUESTION_TIME = 10 // seconds per question
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function shuffle<T>(arr: T[]): T[] {
@@ -98,7 +98,7 @@ function TimerBar({
 }) {
   const pct = (seconds / total) * 100
   return (
-    <div className="w-full h-2 bg-border overflow-hidden">
+    <div className="w-full h-3 bg-border overflow-hidden">
       <div
         className="h-full transition-all duration-1000 ease-linear"
         style={{
@@ -158,7 +158,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
         {/* Feature badges */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
           {[
-            { icon: Timer, label: "45 giây/câu" },
+            { icon: Timer, label: "10 giây/câu" },
             { icon: Flame, label: "Combo thưởng" },
             { icon: Lightbulb, label: "Gợi ý -3đ" },
             { icon: Trophy, label: "Bảng xếp hạng" },
@@ -336,6 +336,7 @@ function QuestionScreen({
   totalQuestions: number
   attempt: number
   streak: number
+  shuffledOptions: { text: string; originalIndex: number }[]
   onAnswer: (idx: number) => void
   onHint: () => void
   hintUsed: boolean
@@ -343,38 +344,39 @@ function QuestionScreen({
   totalScore: number
   disabledOptions: number[]
 }) {
-  const urgent = timeLeft <= 10
+  const urgent = timeLeft <= 4
   const pointsAvailable = POINTS_BY_ATTEMPT[Math.min(attempt - 1, 3)]
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top bar */}
-      <div className="border-b-2 border-border bg-card px-6 py-3 flex items-center justify-between gap-4 flex-wrap">
+      <div className="border-b-2 border-border bg-card px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
         <div className="flex items-center gap-4">
-          <span className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
+          <span className="font-mono text-sm text-muted-foreground uppercase tracking-widest font-semibold">
             {currentCase.code}
           </span>
-          <span className="font-mono text-xs text-foreground font-semibold truncate max-w-[180px]">
+          <span className="w-px h-5 bg-border" />
+          <span className="font-mono text-sm text-foreground font-bold truncate max-w-[220px]">
             {currentCase.title}
           </span>
         </div>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-6">
           {streak >= 2 && (
-            <div className="flex items-center gap-1.5 text-primary">
-              <Flame className="w-4 h-4" />
-              <span className="font-mono text-xs font-bold">{streak} chuỗi</span>
+            <div className="flex items-center gap-2 text-primary">
+              <Flame className="w-5 h-5" />
+              <span className="font-mono text-sm font-bold">{streak} chuỗi</span>
             </div>
           )}
-          <div className="flex items-center gap-1.5">
-            <Star className="w-4 h-4 text-golden" fill="currentColor" />
-            <span className="font-mono text-xs font-bold text-foreground">{totalScore}đ</span>
+          <div className="flex items-center gap-2">
+            <Star className="w-5 h-5 text-golden" fill="currentColor" />
+            <span className="font-mono text-sm font-bold text-foreground">{totalScore}đ</span>
           </div>
           <div
-            className={`flex items-center gap-1.5 font-mono text-sm font-bold ${
-              urgent ? "text-primary animate-pulse" : "text-foreground"
+            className={`flex items-center gap-2 font-mono font-extrabold ${
+              urgent ? "text-primary animate-pulse text-2xl" : "text-foreground text-xl"
             }`}
           >
-            <Timer className="w-4 h-4" />
+            <Timer className="w-5 h-5" />
             {timeLeft}s
           </div>
         </div>
@@ -433,7 +435,7 @@ function QuestionScreen({
 
         {/* Options */}
         <div className="space-y-3 mb-6">
-          {question.options.map((opt, idx) => {
+          {shuffledOptions.map((opt, idx) => {
             const isDisabled = disabledOptions.includes(idx)
             return (
               <button
@@ -453,7 +455,7 @@ function QuestionScreen({
                 >
                   {String.fromCharCode(65 + idx)}
                 </span>
-                <span>{opt}</span>
+                <span>{opt.text}</span>
               </button>
             )
           })}
@@ -698,14 +700,16 @@ function ResultsScreen({
           </h3>
           {caseScores.map(({ case: c, score, max, pct: cp }) => (
             <div key={c.id} className="bg-card border border-border px-5 py-4 space-y-2">
-              <div className="flex items-center justify-between">
-                <div>
+              <div className="flex items-center justify-between gap-4 min-w-0">
+                <div className="min-w-0 flex-1">
                   <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest block">
                     {c.code}
                   </span>
-                  <span className="font-sans text-sm font-semibold text-foreground">{c.title}</span>
+                  <span className="font-sans text-sm font-semibold text-foreground block truncate">
+                    {c.title}
+                  </span>
                 </div>
-                <span className="font-mono text-sm font-bold text-primary">
+                <span className="font-mono text-sm font-bold text-primary shrink-0 whitespace-nowrap">
                   {score}/{max}đ
                 </span>
               </div>
@@ -751,6 +755,7 @@ export default function GamePage() {
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([])
   const [questionIndex, setQuestionIndex] = useState(0)
   const [attempt, setAttempt] = useState(1)
+  const [shuffledOptions, setShuffledOptions] = useState<{ text: string; originalIndex: number }[]>([])
   const [disabledOptions, setDisabledOptions] = useState<number[]>([])
   const [hintUsed, setHintUsed] = useState(false)
   const [records, setRecords] = useState<AnswerRecord[]>([])
@@ -818,12 +823,18 @@ export default function GamePage() {
   // ── Handlers ──
   const handleStart = () => setScreen("case-select")
 
+  const buildShuffledOptions = useCallback((q: Question) => {
+    const opts = q.options.map((text, i) => ({ text, originalIndex: i }))
+    return shuffle(opts)
+  }, [])
+
   const handleSelectCase = (c: Case) => {
     const qs = shuffle(c.questions)
     setCurrentCase(c)
     setShuffledQuestions(qs)
     setQuestionIndex(0)
     setAttempt(1)
+    setShuffledOptions(buildShuffledOptions(qs[0]))
     setDisabledOptions([])
     setHintUsed(false)
     setCaseScore(0)
@@ -833,7 +844,7 @@ export default function GamePage() {
   const handleAnswer = (idx: number) => {
     stopTimer()
     const q = shuffledQuestions[questionIndex]
-    const correct = idx === q.correctIndex
+    const correct = shuffledOptions[idx]?.originalIndex === q.correctIndex
 
     if (correct) {
       const pts = Math.max(
@@ -893,7 +904,9 @@ export default function GamePage() {
       setCompletedCases((prev) => [...prev, currentCase!.id])
       setScreen("case-verdict")
     } else {
-      setQuestionIndex((i) => i + 1)
+      const nextIndex = questionIndex + 1
+      setQuestionIndex(nextIndex)
+      setShuffledOptions(buildShuffledOptions(shuffledQuestions[nextIndex]))
       setAttempt(1)
       setDisabledOptions([])
       setHintUsed(false)
@@ -917,6 +930,7 @@ export default function GamePage() {
     setShuffledQuestions([])
     setQuestionIndex(0)
     setAttempt(1)
+    setShuffledOptions([])
     setDisabledOptions([])
     setHintUsed(false)
     setRecords([])
@@ -964,6 +978,7 @@ export default function GamePage() {
           totalQuestions={shuffledQuestions.length}
           attempt={attempt}
           streak={streak}
+          shuffledOptions={shuffledOptions}
           onAnswer={handleAnswer}
           onHint={handleHint}
           hintUsed={hintUsed}
