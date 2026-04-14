@@ -650,79 +650,143 @@ function ResultsScreen({
     return { case: c, score, max, pct: Math.min(100, Math.round((score / max) * 100)) }
   })
 
+  const starsCount = pct >= 90 ? 5 : pct >= 75 ? 4 : pct >= 55 ? 3 : pct >= 35 ? 2 : 1
+  const correctCount = records.filter((r) => r.correct).length
+
   return (
-    <div className="min-h-screen bg-background px-6 py-12">
-      <div className="max-w-3xl mx-auto space-y-10">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-10 h-[2px] bg-primary" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary font-semibold">
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* ── Hero banner ── */}
+      <div className="bg-foreground relative overflow-hidden">
+        {/* Decorative red stripe */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
+
+        <div className="max-w-4xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center">
+          {/* Left — rank + stars */}
+          <div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-primary font-bold block mb-3">
               Kết quả phiên tòa
             </span>
-            <div className="w-10 h-[2px] bg-primary" />
+            {/* Stars */}
+            <div className="flex items-center gap-1.5 mb-3">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-5 h-5 transition-all ${i < starsCount ? "text-golden" : "text-background/20"}`}
+                  fill={i < starsCount ? "currentColor" : "none"}
+                  strokeWidth={1.5}
+                />
+              ))}
+            </div>
+            <h1
+              className="text-background font-bold leading-tight mb-2"
+              style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1.8rem, 5vw, 3rem)" }}
+            >
+              {rank.label}
+            </h1>
+            <p className="font-sans text-sm text-background/50 leading-snug max-w-sm">{rank.desc}</p>
           </div>
-          <Trophy className="w-16 h-16 text-golden mx-auto" strokeWidth={1.5} />
-          <h1 className="font-[var(--font-playfair)] text-4xl md:text-5xl font-bold text-foreground">
-            {rank.label}
-          </h1>
-          <p className="font-sans text-sm text-muted-foreground">{rank.desc}</p>
-        </div>
 
-        {/* Big score */}
-        <div className="bg-foreground text-background p-8 text-center space-y-2">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-background/50">Tổng điểm</p>
-          <p className="font-mono text-6xl font-extrabold text-primary">{totalScore}</p>
-          <p className="font-mono text-sm text-background/50">/ {maxScore} điểm — {pct}% chính xác</p>
-          <div className="w-full h-2 bg-background/10 mt-4">
-            <div
-              className="h-full bg-primary transition-all duration-700"
-              style={{ width: `${Math.min(100, pct)}%` }}
-            />
+          {/* Right — big score circle */}
+          <div className="flex flex-col items-center justify-center">
+            <div className="relative w-32 h-32 flex items-center justify-center">
+              {/* SVG ring */}
+              <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8" />
+                <circle
+                  cx="60" cy="60" r="52"
+                  fill="none"
+                  stroke="oklch(0.50 0.22 27)"
+                  strokeWidth="8"
+                  strokeLinecap="butt"
+                  strokeDasharray={`${2 * Math.PI * 52}`}
+                  strokeDashoffset={`${2 * Math.PI * 52 * (1 - pct / 100)}`}
+                  style={{ transition: "stroke-dashoffset 1.2s ease-out" }}
+                />
+              </svg>
+              <div className="text-center z-10">
+                <p className="font-mono text-3xl font-extrabold text-primary leading-none">{totalScore}</p>
+                <p className="font-mono text-[10px] text-background/40 uppercase tracking-wider mt-0.5">điểm</p>
+              </div>
+            </div>
+            <div className="flex gap-4 mt-3 text-center">
+              <div>
+                <p className="font-mono text-lg font-bold text-background/80">{pct}%</p>
+                <p className="font-mono text-[9px] text-background/40 uppercase tracking-wider">chính xác</p>
+              </div>
+              <div className="w-px bg-background/10" />
+              <div>
+                <p className="font-mono text-lg font-bold text-background/80">{correctCount}/{records.length}</p>
+                <p className="font-mono text-[9px] text-background/40 uppercase tracking-wider">câu đúng</p>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Per-case breakdown */}
-        <div className="space-y-4">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground font-semibold">
+      {/* ── Case breakdown ── */}
+      <div className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-muted-foreground font-semibold">
             Chi tiết từng vụ án
-          </h3>
-          {caseScores.map(({ case: c, score, max, pct: cp }) => (
-            <div key={c.id} className="bg-card border border-border px-5 py-4 space-y-2">
-              <div className="flex items-center justify-between gap-4 min-w-0">
+          </span>
+          <div className="flex-1 h-px bg-border" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+          {caseScores.map(({ case: c, score, max, pct: cp }, idx) => (
+            <div
+              key={c.id}
+              className="border-2 border-border bg-card p-4 hover:border-primary/50 transition-colors group"
+            >
+              <div className="flex items-start justify-between gap-2 mb-3">
                 <div className="min-w-0 flex-1">
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest block">
-                    {c.code}
-                  </span>
-                  <span className="font-sans text-sm font-semibold text-foreground block truncate">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-mono text-[9px] text-primary uppercase tracking-widest font-bold">
+                      {c.code}
+                    </span>
+                    <span className="font-mono text-[9px] text-muted-foreground">
+                      #{String(idx + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="font-sans text-xs font-semibold text-foreground block truncate leading-snug">
                     {c.title}
                   </span>
                 </div>
-                <span className="font-mono text-sm font-bold text-primary shrink-0 whitespace-nowrap">
-                  {score}/{max}đ
+                {/* Score badge */}
+                <div className="shrink-0 text-right">
+                  <p className="font-mono text-base font-extrabold text-primary leading-none">{score}</p>
+                  <p className="font-mono text-[9px] text-muted-foreground">/{max}đ</p>
+                </div>
+              </div>
+
+              {/* Bar + pct */}
+              <div className="flex items-center gap-2">
+                <div className="flex-1 h-1.5 bg-border overflow-hidden">
+                  <div
+                    className="h-full bg-primary transition-all duration-700"
+                    style={{ width: `${cp}%` }}
+                  />
+                </div>
+                <span
+                  className={`font-mono text-xs font-bold w-9 text-right ${cp >= 80 ? "text-primary" : cp >= 50 ? "text-foreground" : "text-muted-foreground"}`}
+                >
+                  {cp}%
                 </span>
               </div>
-              <div className="w-full h-1.5 bg-border">
-                <div
-                  className="h-full bg-primary transition-all duration-500"
-                  style={{ width: `${cp}%` }}
-                />
-              </div>
-              <p className="font-mono text-xs text-muted-foreground text-right">{cp}%</p>
             </div>
           ))}
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center border-t border-border pt-5">
           <button
             onClick={onRestart}
-            className="group inline-flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 font-sans text-sm uppercase tracking-widest font-bold hover:bg-primary/90 transition-all"
+            className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-7 py-3 font-sans text-xs uppercase tracking-widest font-bold hover:bg-primary/90 transition-all"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-3.5 h-3.5" />
             Chơi lại
           </button>
-          <HomeButton className="inline-flex items-center justify-center gap-2 border-2 border-border px-8 py-4 font-sans text-sm uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all" />
+          <HomeButton className="inline-flex items-center justify-center gap-2 border-2 border-border px-7 py-3 font-sans text-xs uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all" />
         </div>
       </div>
     </div>

@@ -1,1 +1,30 @@
-PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHN0eWxlPgogICAgQG1lZGlhIChwcmVmZXJzLWNvbG9yLXNjaGVtZTogbGlnaHQpIHsKICAgICAgLmJhY2tncm91bmQgeyBmaWxsOiBibGFjazsgfQogICAgICAuZm9yZWdyb3VuZCB7IGZpbGw6IHdoaXRlOyB9CiAgICB9CiAgICBAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgICAgIC5iYWNrZ3JvdW5kIHsgZmlsbDogd2hpdGU7IH0KICAgICAgLmZvcmVncm91bmQgeyBmaWxsOiBibGFjazsgfQogICAgfQogIDwvc3R5bGU+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzc5NjBfNDM5NDUpIj4KICAgIDxyZWN0IGNsYXNzPSJiYWNrZ3JvdW5kIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjM3IiAvPgogICAgPGcgc3R5bGU9InRyYW5zZm9ybTogc2NhbGUoOTUlKTsgdHJhbnNmb3JtLW9yaWdpbjogY2VudGVyIj4KICAgICAgPHBhdGggY2xhc3M9ImZvcmVncm91bmQiCiAgICAgICAgZD0iTTEwMS4xNDEgNTNIMTM2LjYzMkMxNTEuMDIzIDUzIDE2Mi42ODkgNjQuNjY2MiAxNjIuNjg5IDc5LjA1NzNWMTEyLjkwNEgxNDguMTEyVjc5LjA1NzNDMTQ4LjExMiA3OC43MTA1IDE0OC4wOTggNzguMzY2MiAxNDguMDcyIDc4LjAyNTFMMTEyLjU4MSAxMTIuODk4QzExMi43MDEgMTEyLjkwMiAxMTIuODIxIDExMi45MDQgMTEyLjk0MSAxMTIuOTA0SDE0OC4xMTJWMTI2LjY3MkgxMTIuOTQxQzk4LjU1MDQgMTI2LjY3MiA4Ni41NjM4IDExNC44OTEgODYuNTYzOCAxMDAuNVY2Ni43NDM0SDEwMS4xNDFWMTAwLjVDMTAxLjE0MSAxMDEuMTUgMTAxLjE5MSAxMDEuNzkyIDEwMS4yODkgMTAyLjQyMkwxMzcuNTYgNjYuNzgxNkMxMzcuMjU1IDY2Ljc1NjMgMTM2Ljk0NSA2Ni43NDM0IDEzNi42MzIgNjYuNzQzNEgxMDEuMTQxVjUzWiIgLz4KICAgICAgPHBhdGggY2xhc3M9ImZvcmVncm91bmQiCiAgICAgICAgZD0iTTY1LjI5MjYgMTI0LjEzNkwxNCA2Ni43MzcySDM0LjYzNTVMNjQuNzQ5NSAxMDAuNDM2VjY2LjczNzJIODAuMTM2NVYxMTguNDdDODAuMTM2NSAxMjYuMjc4IDcwLjQ5NTMgMTI5Ljk1OCA2NS4yOTI2IDEyNC4xMzZaIiAvPgogICAgPC9nPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDBfNzk2MF80Mzk0NSI+CiAgICAgIDxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiBmaWxsPSJ3aGl0ZSIgLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgo8L3N2Zz4=
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @media (prefers-color-scheme: light) {
+      .background { fill: black; }
+      .foreground { fill: white; stroke: white; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .background { fill: white; }
+      .foreground { fill: black; stroke: black; }
+    }
+  </style>
+  <rect class="background" width="180" height="180" rx="37" />
+  <!-- Scales of Justice (law icon) -->
+  <g class="foreground" transform="translate(0,0)">
+    <!-- pole -->
+    <path d="M90 40v85" stroke-width="10" stroke-linecap="round" />
+    <!-- top beam -->
+    <path d="M55 65h70" stroke-width="10" stroke-linecap="round" />
+    <!-- left hanger -->
+    <path d="M70 65v15" stroke-width="6" stroke-linecap="round" />
+    <!-- right hanger -->
+    <path d="M110 65v15" stroke-width="6" stroke-linecap="round" />
+    <!-- left scale -->
+    <path d="M52 82c3 10 10 16 18 16s15-6 18-16H52z" fill="currentColor" stroke="none" />
+    <!-- right scale -->
+    <path d="M92 82c3 10 10 16 18 16s15-6 18-16H92z" fill="currentColor" stroke="none" />
+    <!-- base -->
+    <path d="M62 140h56" stroke-width="12" stroke-linecap="round" />
+  </g>
+</svg>
