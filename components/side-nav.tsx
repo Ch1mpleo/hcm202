@@ -9,6 +9,7 @@ const navItems = [
   { id: "phan1", label: "Kiểm soát" },
   { id: "phan3", label: "Biện pháp" },
   { id: "ketluan", label: "Kết luận" },
+  { id: "credits", label: "Tác giả" },
 ]
 
 export function SideNav() {
