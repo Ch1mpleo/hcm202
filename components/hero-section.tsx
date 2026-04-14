@@ -12,7 +12,6 @@ gsap.registerPlugin(ScrollTrigger)
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const exitCurtainRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -102,17 +101,7 @@ export function HeroSection() {
             </svg>
           </a>
           <button
-            onClick={() => {
-              const curtain = exitCurtainRef.current
-              if (!curtain) { router.push("/game"); return }
-              gsap.set(curtain, { display: "flex", x: "-100%" })
-              gsap.to(curtain, {
-                x: "0%",
-                duration: 0.45,
-                ease: "power3.inOut",
-                onComplete: () => router.push("/game"),
-              })
-            }}
+            onClick={() => router.push("/game")}
             className="group inline-flex items-center gap-2.5 border-2 border-foreground/30 px-6 py-3 font-sans text-sm uppercase tracking-widest font-bold text-foreground hover:border-primary hover:text-primary transition-all duration-200"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,29 +139,6 @@ export function HeroSection() {
           sizes="45vw"
           priority
         />
-      </div>
-
-      {/* Exit curtain */}
-      <div
-        ref={exitCurtainRef}
-        className="fixed inset-0 z-[9999] hidden items-center justify-center pointer-events-none"
-        style={{ background: "oklch(0.42 0.19 27)" }}
-        aria-hidden="true"
-      >
-        <div className="flex flex-col items-center gap-5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-nPHUcZG0NFWlUSiWMSB1CEAUZDFGBW.png"
-            alt=""
-            className="w-20 h-20 object-contain"
-          />
-          <p
-            className="font-bold uppercase tracking-[0.15em] text-white"
-            style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1rem, 3vw, 1.6rem)" }}
-          >
-            {"Phiên Tòa Liêm Chính"}
-          </p>
-        </div>
       </div>
 
       {/* Floating info tag */}

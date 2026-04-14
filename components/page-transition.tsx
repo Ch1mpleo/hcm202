@@ -12,8 +12,7 @@ export function usePageExit() {
   return useContext(ExitContext)
 }
 
-const CURTAIN_TEXT_ENTER = "Bước vào phiên tòa liêm chính"
-const CURTAIN_TEXT_EXIT  = "Trở về trang chủ"
+const CURTAIN_TEXT_EXIT = "Trở về trang chủ"
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const curtainRef  = useRef<HTMLDivElement>(null)
@@ -26,8 +25,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const curtain = curtainRef.current
     const content = contentRef.current
     if (!curtain || !content) return
-
-    if (labelRef.current) labelRef.current.textContent = CURTAIN_TEXT_ENTER
 
     const tl = gsap.timeline()
     gsap.set(curtain, { x: "-100%", display: "flex" })
@@ -68,11 +65,21 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         style={{ background: "oklch(0.42 0.19 27)" }}
         aria-hidden="true"
       >
-        <p
-          ref={labelRef}
-          className="font-bold text-white text-center px-8"
-          style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1.4rem, 4vw, 2.4rem)", letterSpacing: "0.04em" }}
-        />
+        <div className="flex flex-col items-center gap-5 text-center px-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-nPHUcZG0NFWlUSiWMSB1CEAUZDFGBW.png"
+            alt=""
+            className="w-20 h-20 object-contain"
+          />
+          <p
+            ref={labelRef}
+            className="font-bold text-white"
+            style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1.2rem, 3.5vw, 2rem)", letterSpacing: "0.06em" }}
+          >
+            {"Phiên Tòa Liêm Chính"}
+          </p>
+        </div>
       </div>
 
       <div ref={contentRef}>
