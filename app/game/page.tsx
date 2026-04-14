@@ -14,6 +14,7 @@ import {
   BookOpen,
   Timer,
   Trophy,
+  CheckCircle,
   CheckCircle2,
   XCircle,
   Lightbulb,
@@ -650,79 +651,120 @@ function ResultsScreen({
     return { case: c, score, max, pct: Math.min(100, Math.round((score / max) * 100)) }
   })
 
+  const correctCount = records.filter((r) => r.correct).length
+  const totalQ = records.length
+
   return (
-    <div className="min-h-screen bg-background px-6 py-12">
-      <div className="max-w-3xl mx-auto space-y-10">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-10 h-[2px] bg-primary" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary font-semibold">
-              Kết quả phiên tòa
-            </span>
-            <div className="w-10 h-[2px] bg-primary" />
-          </div>
-          <Trophy className="w-16 h-16 text-golden mx-auto" strokeWidth={1.5} />
-          <h1 className="font-[var(--font-playfair)] text-4xl md:text-5xl font-bold text-foreground">
-            {rank.label}
-          </h1>
-          <p className="font-sans text-sm text-muted-foreground">{rank.desc}</p>
-        </div>
+    <div className="min-h-screen bg-background flex flex-col">
 
-        {/* Big score */}
-        <div className="bg-foreground text-background p-8 text-center space-y-2">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-background/50">Tổng điểm</p>
-          <p className="font-mono text-6xl font-extrabold text-primary">{totalScore}</p>
-          <p className="font-mono text-sm text-background/50">/ {maxScore} điểm — {pct}% chính xác</p>
-          <div className="w-full h-2 bg-background/10 mt-4">
-            <div
-              className="h-full bg-primary transition-all duration-700"
-              style={{ width: `${Math.min(100, pct)}%` }}
-            />
-          </div>
-        </div>
+      {/* ── Hero band ─────────────────────────────────────────── */}
+      <div className="bg-foreground text-background relative overflow-hidden">
+        {/* Decorative red stripe */}
+        <div className="absolute top-0 left-0 w-2 h-full bg-primary" />
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-primary/5 rounded-full translate-x-16 translate-y-16" />
 
-        {/* Per-case breakdown */}
-        <div className="space-y-4">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-            Chi tiết từng vụ án
-          </h3>
-          {caseScores.map(({ case: c, score, max, pct: cp }) => (
-            <div key={c.id} className="bg-card border border-border px-5 py-4 space-y-2">
-              <div className="flex items-center justify-between gap-4 min-w-0">
-                <div className="min-w-0 flex-1">
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest block">
-                    {c.code}
-                  </span>
-                  <span className="font-sans text-sm font-semibold text-foreground block truncate">
-                    {c.title}
-                  </span>
+        <div className="max-w-4xl mx-auto px-8 py-12 pl-12 flex flex-col md:flex-row md:items-center gap-8">
+          {/* Left: rank + score */}
+          <div className="flex-1 min-w-0">
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3 font-semibold">
+              Phiên Tòa Liêm Chính — Kết quả
+            </p>
+            <h1
+              className="font-bold text-background leading-tight mb-2"
+              style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(2rem, 5vw, 3.2rem)" }}
+            >
+              {rank.label}
+            </h1>
+            <p className="font-sans text-sm text-background/55 mb-6">{rank.desc}</p>
+
+            {/* Score row */}
+            <div className="flex items-end gap-3 mb-3">
+              <span className="font-mono font-extrabold text-primary leading-none" style={{ fontSize: "clamp(3rem, 8vw, 5rem)" }}>
+                {totalScore}
+              </span>
+              <span className="font-mono text-sm text-background/40 pb-2">/ {maxScore} điểm</span>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full h-2 bg-background/10">
+              <div
+                className="h-full bg-primary transition-all duration-1000"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+            <p className="font-mono text-xs text-background/35 mt-1.5">{pct}% chính xác</p>
+          </div>
+
+          {/* Right: stat pills */}
+          <div className="shrink-0 flex md:flex-col gap-3">
+            {[
+              { label: "Câu đúng",   value: `${correctCount}/${totalQ}`, icon: CheckCircle },
+              { label: "Vụ án",      value: `${caseScores.length}`,      icon: Scale },
+              { label: "Độ chính xác", value: `${pct}%`,                 icon: Trophy },
+            ].map(({ label, value, icon: Icon }) => (
+              <div key={label} className="flex items-center gap-3 bg-background/8 border border-background/10 px-4 py-3 min-w-[140px]">
+                <Icon className="w-4 h-4 text-primary shrink-0" strokeWidth={1.8} />
+                <div>
+                  <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-background/40">{label}</p>
+                  <p className="font-mono text-base font-bold text-background">{value}</p>
                 </div>
-                <span className="font-mono text-sm font-bold text-primary shrink-0 whitespace-nowrap">
-                  {score}/{max}đ
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Per-case breakdown ─────────────────────────────────── */}
+      <div className="max-w-4xl mx-auto w-full px-8 py-10 flex-1">
+        <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground font-semibold mb-5">
+          Chi tiết từng vụ án
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {caseScores.map(({ case: c, score, max, pct: cp }) => (
+            <div key={c.id} className="border-2 border-border bg-card px-4 py-4 flex gap-4 items-center hover:border-primary/40 transition-colors">
+              {/* Circular percentage */}
+              <div className="shrink-0 relative w-12 h-12">
+                <svg viewBox="0 0 36 36" className="w-12 h-12 -rotate-90">
+                  <circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-border" />
+                  <circle
+                    cx="18" cy="18" r="15" fill="none"
+                    stroke="currentColor" strokeWidth="2.5"
+                    strokeDasharray={`${cp * 0.942} 94.2`}
+                    strokeLinecap="butt"
+                    className="text-primary transition-all duration-700"
+                  />
+                </svg>
+                <span className="absolute inset-0 flex items-center justify-center font-mono text-[10px] font-bold text-foreground">
+                  {cp}%
                 </span>
               </div>
-              <div className="w-full h-1.5 bg-border">
-                <div
-                  className="h-full bg-primary transition-all duration-500"
-                  style={{ width: `${cp}%` }}
-                />
+
+              {/* Info */}
+              <div className="min-w-0 flex-1">
+                <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground">{c.code}</p>
+                <p className="font-sans text-sm font-semibold text-foreground truncate leading-tight mt-0.5">{c.title}</p>
+                <div className="flex items-center gap-2 mt-2">
+                  <div className="flex-1 h-1 bg-border">
+                    <div className="h-full bg-primary transition-all duration-700" style={{ width: `${cp}%` }} />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-primary shrink-0">{score}/{max}đ</span>
+                </div>
               </div>
-              <p className="font-mono text-xs text-muted-foreground text-right">{cp}%</p>
             </div>
           ))}
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+        <div className="flex flex-col sm:flex-row gap-3 mt-8">
           <button
             onClick={onRestart}
-            className="group inline-flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 font-sans text-sm uppercase tracking-widest font-bold hover:bg-primary/90 transition-all"
+            className="inline-flex items-center justify-center gap-2.5 bg-primary text-primary-foreground px-8 py-3.5 font-sans text-sm uppercase tracking-widest font-bold hover:bg-primary/90 transition-all"
           >
             <RotateCcw className="w-4 h-4" />
             Chơi lại
           </button>
-          <HomeButton className="inline-flex items-center justify-center gap-2 border-2 border-border px-8 py-4 font-sans text-sm uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all" />
+          <HomeButton className="inline-flex items-center justify-center gap-2.5 border-2 border-border px-8 py-3.5 font-sans text-sm uppercase tracking-widest font-medium text-foreground hover:border-primary hover:text-primary transition-all" />
         </div>
       </div>
     </div>
